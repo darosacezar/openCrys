@@ -1,0 +1,300 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    "alpha.methanol.*"
+    {
+        nAlphaSubCycles     2;
+        nAlphaCorr          2;
+
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-7;
+        relTol          0;
+        nSweeps         1;
+    }
+    "alpha.methanol.*Final"
+    {
+      	nAlphaSubCycles     2;
+        nAlphaCorr          2;
+
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-7;
+        relTol          0;
+        nSweeps         1;
+    }
+    he
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+	tolerance	1e-7;
+	relTol		0;
+    }
+    heFinal
+    {
+        $he;
+        relTol          0;
+    }
+
+    p_rgh
+    {
+        solver          GAMG;
+        tolerance       1e-7;
+        relTol          0.01;
+        smoother        GaussSeidel;
+        cacheAgglomeration true;
+	directSolveCoarsest false;
+	//nPreSweeps 0;
+	//nPostSweeps 1;
+	//NFinestSweeps 1;
+        nCellsInCoarsestLevel 200;
+        agglomerator    faceAreaPair;
+        mergeLevels     1;
+    }
+
+    p_rghFinal
+    {
+        $p_rgh;
+        relTol          0;
+    }
+
+    "U|k|epsilon"
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-7;
+        relTol          0;
+        nSweeps         1;
+    }
+
+    "(U|k|epsilon)Final"
+    {
+        $U;
+        relTol          0;
+    }
+    Y 
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-7;
+        relTol          0;
+        nSweeps         1;
+    }
+    YFinal 
+    {
+        $Y;            
+        relTol           0;
+    }
+    S_solute 
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+	tolerance	1e-7;
+	relTol		0;
+    };
+    S_soluteFinal 
+    {
+        $S_solute;            
+        relTol           0;
+    };
+    S1 
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+	tolerance	1e-7;
+	relTol		0;
+    };
+    S1Final 
+    {
+        $S1;            
+        relTol           0;
+    };
+    S_solvent 
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+	tolerance	1e-7;
+	relTol		0;
+    };
+    S_solventFinal 
+    {
+        $S_solvent;            
+        relTol           0;
+    };
+    S_antiSolvent 
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+	tolerance	1e-7;
+	relTol		0;
+    };
+    S_antiSolventFinal 
+    {
+        $S_antiSolvent;            
+        relTol           0;
+    };
+    P1 
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-7;
+        relTol          0;
+        nSweeps         1;
+    };
+    P1Final 
+    {
+        $P1;            
+        relTol           0;
+    };
+    P2 
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-7;
+        relTol          0;
+        nSweeps         1;
+    };
+    P2Final 
+    {
+        $P2;            
+        relTol           0;
+    };
+    S3 
+    {
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        tolerance       1e-7;
+        relTol          0;
+        nSweeps         1;
+    };
+    S3Final 
+    {
+        $S3;            
+        relTol           0;
+    };
+}
+
+PIMPLE
+{
+    momentumPredictor   yes;
+    nOuterCorrectors    50;
+    nCorrectors         2;
+    nNonOrthogonalCorrectors 0;
+    residualControl
+    {
+        U
+        {
+                tolerance  1e-3;
+                relTol      0;
+        }
+        p_rgh
+        {
+                tolerance  1e-3;
+                relTol      0;
+        }
+        he
+        {
+	  tolerance	1e-5;
+	  relTol		0;
+        }
+        "alpha.methanol.*"
+	{
+	  tolerance	1e-3;
+	  relTol	0;
+	}
+	S_solute
+	{
+	    tolerance  1e-3;
+            relTol      0;
+	}
+        S1
+	{
+	    tolerance  1e-3;
+            relTol      0;
+	}
+	S_solvent
+	{
+	    tolerance  1e-3;
+            relTol      0;
+	}
+	S_antiSolvent
+	{
+	    tolerance  1e-3;
+            relTol      0;
+	}
+	P1
+	{
+	    tolerance  1e-3;
+            relTol      0;
+	}
+	P2
+	{
+	    tolerance  1e-3;
+            relTol      0;
+	}
+	S3
+	{
+	    tolerance  1e-3;
+            relTol      0;
+	}
+	Y
+	{
+	    tolerance  1e-5;
+            relTol      0;
+	}
+     }
+}
+relaxationFactors
+{
+    fields
+    {
+        p_rgh      0.3;
+        p_rghFinal   1;
+	he		0.8;
+	heFinal		1;
+	"alpha.methanol.*"	0.8;
+	"alpha.methanol.*Final"	1;
+	Y		0.5;
+	YFinal		1;
+	S_solute		0.8;
+	S_soluteFinal		1;
+	S_solvent		0.8;
+	S_solventFinal		1;
+	S_antiSolvent		0.8;
+	S_antiSolventFinal		1;
+	P1		0.5;
+	P1Final		1;
+	P2		0.5;
+	P2Final		1;
+	S3		0.5;
+	S3Final		1;
+	S1		0.5;
+	S1Final		1;
+    }
+    equations
+    {
+        "U|k|epsilon"     0.3;
+        "(U|k|epsilon)Final"   1; 
+        p_rgh      0.3;
+        p_rghFinal   1;
+    }
+}
+
+
+// ************************************************************************* //
