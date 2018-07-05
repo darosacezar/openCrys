@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         Euler;
+}
+
+gradSchemes
+{
+    default         cellLimited leastSquares 1;
+}
+
+divSchemes
+{
+    default         none;
+
+    div(rhoPhi,U)  Gauss linearUpwind grad(U);
+    div(phi,epsilon) Gauss linearUpwind grad(epsilon);
+    div(phi,alpha)  Gauss linearUpwind grad(alpha);
+    div(phi,k)      Gauss linearUpwind grad(k);
+    div((muEff*dev(T(grad(U))))) Gauss linear;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+    div((muEff*dev2(T(grad(U))))) Gauss linear;
+    div(((rho*nuEff)*(dev2(grad(U).T())&U)))	Gauss linear;
+    div(((rho*nuEff)*(grad(U)&U)))	Gauss linear;
+    div(rhoPhi,K)	Gauss linearUpwind grad(K);
+    div(rhoPhi,he)	Gauss linearUpwind grad(he);
+    div(phi,Y)		Gauss upwind grad(Y);
+    div(rhoPhi,S_solute)		Gauss linearUpwind grad(S_solute);
+    div(rhoPhi,P1)		Gauss linearUpwind grad(P1);
+    div(rhoPhi,P2)		Gauss linearUpwind grad(P2);
+    div(rhoPhi,S_solvent)		Gauss linearUpwind grad(S_solvent);
+    div(rhoPhi,S_antiSolvent)		Gauss linearUpwind grad(S_antiSolvent);
+    div(rhoPhi,S3)		Gauss linearUpwind grad(S3);
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;		
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+fluxRequired
+{
+    default         no;
+    p_rgh;
+    alpha.methanol;
+}
+
+
+// ************************************************************************* //
