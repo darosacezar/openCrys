@@ -5,7 +5,7 @@ Authors: Cezar A. da Rosa
          Richard D. Braatz
          
 The software implements a multiscale model, capable of predicting macro to micro-mixing scales, as well as the full CSD and energy conservation, including non-ideal mixing rules.
-The Reynolds-averaged Navier-Stokes equation with variable properties is coupled with a three-environment presumed probability density function (PDF) micro-mixing model,21 the spatially varying population balance equation semi-discretized using a high-resolution finite-volume method, and energy balance and scalar transport equations.
+The Reynolds-averaged Navier-Stokes equation with variable properties is coupled with a three-environment presumed probability density function (PDF) micro-mixing model, the spatially varying population balance equation semi-discretized using a high-resolution finite-volume method, and energy balance and scalar transport equations.
 
 Please refer to the following papers for more information:
 
