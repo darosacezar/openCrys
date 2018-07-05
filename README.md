@@ -1,8 +1,7 @@
 # openCrys
 Open-Source Software for the Multiscale Modeling of Combined Antisolvent and Cooling Crystallization in Turbulent Flow Using OpenFOAM
 
-Authors: Cezar A. da Rosa
-         Richard D. Braatz
+Authors: Cezar A. da Rosa and Richard D. Braatz
          
 The software implements a multiscale model, capable of predicting macro to micro-mixing scales, as well as the full CSD and energy conservation, including non-ideal mixing rules.
 The Reynolds-averaged Navier-Stokes equation with variable properties is coupled with a three-environment presumed probability density function (PDF) micro-mixing model, the spatially varying population balance equation semi-discretized using a high-resolution finite-volume method, and energy balance and scalar transport equations.
