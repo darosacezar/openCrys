@@ -23,9 +23,11 @@ Cezar A. da Rosa and Richard D. Braatz
 
     You should have received a copy of the GNU General Public License
     along with openCrys.  If not, see <https://www.gnu.org/licenses/>.
-
+    
+# Requirements
 OpenFOAM 5.x is required to compile the software.
 
+# References
 Please refer to the following articles for more information:
 
 1 - Cezar A. da Rosa, and Richard D. Braatz. Multiscale Modeling and Simulation of Macromixing, Micromixing, and Crystal Size Distribution     in Radial Mixers/Crystallizers. Ind. Eng. Chem. Res., 2018, 57 (15), pp 5433–5441
